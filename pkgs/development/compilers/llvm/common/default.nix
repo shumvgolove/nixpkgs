@@ -393,6 +393,8 @@ makeScopeWithSplicing' {
 
       # This is an "oddly ordered" bootstrap just for Darwin. Probably
       # don't want it otherwise.
+      # Also used on Android to get compiler-rt-libc building without
+      # compiler-rt-no-libc and libunwind.
       clangNoCompilerRtWithLibc = wrapCCWith rec {
         cc = self.clang-unwrapped;
         libcxx = null;

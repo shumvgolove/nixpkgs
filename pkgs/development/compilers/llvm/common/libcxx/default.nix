@@ -95,6 +95,10 @@ let
   cmakeFlags = [
     (lib.cmakeFeature "LLVM_ENABLE_RUNTIMES" (lib.concatStringsSep ";" runtimes))
   ]
+  ++ lib.optionals stdenv.hostPlatform.isAndroid [
+    (lib.cmakeFeature "CMAKE_CXX_FLAGS" "-fno-emulated-tls")
+    (lib.cmakeFeature "CMAKE_C_FLAGS" "-fno-emulated-tls")
+  ]
   ++ lib.optionals stdenv.hostPlatform.isWasm [
     (lib.cmakeBool "CMAKE_CXX_COMPILER_WORKS" true)
     (lib.cmakeBool "CMAKE_C_COMPILER_WORKS" true)
